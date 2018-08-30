@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/blog','BlogController@add')->name('blog.add');
+Route::post('/blog','BlogController@doadd')->name('blog.doadd');
+
+
