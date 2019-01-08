@@ -11,10 +11,10 @@ input[type=text] {
 </style>
 
 <div class="container">
-    <h1>我的日志
+    <h5>我的日志
 		<a href="{{ route('blog.add') }}">写日志</a>
-		<a href="">删除选中日志</a>
-    </h1>
+		{{-- <a href="">删除选中日志</a> --}}
+    </h6>
     <br>
     <form>
         关键字：
@@ -56,7 +56,13 @@ input[type=text] {
                 <td><a href="{{ route('blog.content',['id'=>$v->id]) }}">{{$v->title}}</a> </td>
                 <td>{{$v->created_at}}</td>
                 <td>{{$v->updated_at}}</td>
-                <td>{{ $v->accessable }}</td>
+                @if($v->accessable=='public')
+                <td>公开</td>
+                @elseif($v->accessable=='protected')
+                <td>好友可见</td>
+                @elseif($v->accessable=='private')
+                <td>私有</td>
+                @endif
                 <td class="btn">
                     <a href="{{ route('blog.edit' , ['id'=>$v->id]) }}">修改</a>
                     <a onclick="return confirm('确定要删除吗？');" href="{{ route('blog.delete' , ['id' => $v->id]) }}">删除</a>

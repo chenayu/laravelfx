@@ -9,7 +9,7 @@ Route::middleware('login')->group(function(){
 
     Route::post("/face",'FaceController@face')->name('setface');
 
-      // 显示添加日志表单
+    // 显示添加日志表单
     Route::get('/blog', 'BlogController@add')->name('blog.add');
     // 处理表单的路由
     Route::post('/blog', 'BlogController@doadd')->name('blog.doadd');
@@ -43,8 +43,8 @@ Route::middleware('login')->group(function(){
     Route::get('/friend/{user_id}', 'FriendController@friend')->name('friend.friend');
     // 删除好友
     Route::get('/delfriend/{user_id}', 'FriendController@delfriend')->name('friend.delfriend');
-
-
+    //好友空间
+    Route::get('/frspace/{user_id}', 'FriendController@friendSpace')->name('friend.space');
 });
 
 

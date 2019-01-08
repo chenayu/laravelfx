@@ -13,7 +13,7 @@
     <div class="container clearfix">
 		<div class="left">
 			<div class="art-list">
-				<h2>好友动态</h2>
+				<h5>好友动态</h5>
 				<ul class="friends-act">
                 @foreach($blogs as $b)
 					<li>
@@ -46,7 +46,7 @@
 				<ul class="user-act clearfix">
                 @foreach($gz as $g)
 
-					<li><a href="{{ route('space',['id'=>$g->user_id]) }}"><img src="{{ Storage::url($g->face) }}" alt=""><br>{{ $g->mobile }}</a></li>
+					<li><a href="{{ route('friend.space',['id'=>$g->user_id]) }}"><img src="{{ Storage::url($g->face) }}" alt=""><br>{{ $g->mobile }}</a></li>
                     @endforeach
 					
 				</ul>

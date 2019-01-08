@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Follow;
 use App\Models\Friend;
+use App\Models\User;
 use DB;
+use App\Models\Blog;
 
 class FriendController extends Controller
 {
@@ -158,5 +160,47 @@ class FriendController extends Controller
             ];
         }
 
+    }
+
+    //好友空间
+    public function friendSpace($user_id){
+        //取出两个人的关系
+        $gx = Friend::gx($user_id);
+        //获取用户信息
+        $user = User::find($user_id);
+
+        //获取所有关注
+        $sygx = new FriendController();
+        $sygz = $sygx->friendGz($user_id);
+        //获取所有粉丝
+        $syfs =  $sygx->friendFs($user_id);
+        
+        //判断是不是好友,获取是否只有好友可见的日志
+        $c = $gx=='hy' ? ['public','protected'] : 'public';
+        $data = Blog::where('user_id',$user_id)
+        ->whereIn('accessable',[$c])
+        ->select('blogs.*','users.mobile')
+        ->leftJoin('users','blogs.user_id','=','users.id')->get();
+
+        return view('space.space',['gx'=>$gx,'user'=>$user,'data'=>$data,'gzs'=>$sygz,'fss'=>$syfs]);
+    }
+
+    //获取关注的好友
+    public function friendGz($user_id){
+        $wgz = session('id');
+        // select * from test_follows a left join test_users b on a.follow_id = b.id where a.user_id = 1
+        return Follow::where('user_id',$user_id)
+        ->select('follows.user_id','users.*')
+        ->leftJoin('users','follows.follow_id','=','users.id')->get();
+          
+    }
+
+    //获取粉丝
+    public function friendFs($user_id){
+        //select * from test_follows a left join test_users b on a.user_id = b.id where a.follow_id = 1
+        return Follow::where('follow_id',$user_id)
+        ->select('follows.user_id','users.*')
+        ->leftJoin('users','follows.user_id','=','users.id')->get();
+        
     }
 }
