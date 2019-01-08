@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,   // CSRF保护
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\Access::class,
         ],
         // 应用到 routes/api.php  （API开发时不用使用SESSION、cookie、也没有CSRF保护）
         'api' => [

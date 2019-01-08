@@ -2,6 +2,8 @@
 /public/hot
 /public/storage
 /public/images
+/public/access
+/public/my
 /public/uploads/blog
 /public/uploads/face
 /storage/*.key
