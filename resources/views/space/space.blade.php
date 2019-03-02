@@ -17,9 +17,9 @@
 				<ul class="friends-act">
 					@foreach($data as $v)
 					<li>
-					<a target="_blank" href="" class="people">{{$v->mobile}}</a>
+					<a target="_blank" href="{{ route('space', [ 'id'=>$v->user->id]) }}" class="people">{{$v->mobile}}</a>
 					在 <strong>{{$v->created_at}}</strong> 发表了:
-                        <a target="_blank" href=" ">{{$v->title}}</a>
+                        <a target="_blank" href="{{ route('blog.content',['id'=>$v->id]) }}">{{$v->title}}</a>
                     </li>
 					@endforeach
 				</ul>

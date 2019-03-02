@@ -20,6 +20,7 @@
                         <a target="_blank" href="{{ route('space', [ 'id'=>$b->user->id]) }}" class="people">{{$b->user->mobile}}</a>
                         在 <strong>[{{$b->created_at}}]</strong> 发表了:
                         <a target="_blank" href="{{ route('blog.content',['id'=>$b->id]) }}">{{$b->title}}</a>
+                     
                     </li>
                 @endforeach
 				</ul>
